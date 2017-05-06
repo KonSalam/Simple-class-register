@@ -11,9 +11,9 @@ namespace SimpleClassRegisterApp.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
-        public string Index()
+        public IActionResult Index()
         {
-            return "TEMP";
+            return View();
         }
     }
 }
