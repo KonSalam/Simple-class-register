@@ -1,29 +1,35 @@
 {
   "dependencies": {
-    "Microsoft.Extensions.Configuration.Binder": "1.1.1",
-    "Microsoft.Extensions.Configuration.Json": "1.1.1",
+    "bootstrap": "3.3.7",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.1",
+    "Microsoft.AspNetCore.Mvc": "1.1.2",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.2",
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.1.0-preview4-final",
+      "type": "build"
+    },
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.1",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.1",
-    "Microsoft.Extensions.Logging.Console": "1.1.1",
-    "Microsoft.NETCore.App": {
-      "version": "1.0.1",
-      "type": "platform"
-    },
-    "Microsoft.AspNetCore.Diagnostics": "1.1.1",
-    "bootstrap": "3.3.7",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.1",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.1",
-    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.2",
-    "Microsoft.AspNetCore.Mvc": "1.1.2",
-    "Microsoft.AspNetCore.StaticFiles": "1.1.1"
+    "Microsoft.Extensions.Configuration.Binder": "1.1.1",
+    "Microsoft.Extensions.Configuration.Json": "1.1.1",
+    "Microsoft.Extensions.Logging.Console": "1.1.1",
+    "Microsoft.NETCore.App": {
+      "version": "1.1.0",
+      "type": "platform"
+    },
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
   },
 
   "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
+    "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final"
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"
@@ -51,5 +57,6 @@
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  }
+  },
+
 }
