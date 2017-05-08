@@ -15,5 +15,11 @@ namespace SimpleClassRegisterApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
+
     }
 }

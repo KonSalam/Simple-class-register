@@ -39,7 +39,7 @@ namespace SimpleClassRegisterApp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FeatureToggles features)
         {
             loggerFactory.AddConsole();
-            app.UseExceptionHandler("/error.html");
+            app.UseExceptionHandler("/Home/Error");
 
             if (features.EnableDeveloperExceptions)
             {
