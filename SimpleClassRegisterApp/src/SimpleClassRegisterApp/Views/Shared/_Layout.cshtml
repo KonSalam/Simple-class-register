@@ -1,5 +1,4 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-
+    @RenderSection("scripts")
     <title>Class Register</title>
 </head>
 <body>
@@ -32,8 +31,8 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Comments</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" asp-action="SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
