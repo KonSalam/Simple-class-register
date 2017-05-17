@@ -26,12 +26,23 @@ namespace SimpleClassRegisterApp.Controllers
             }
 
             return RedirectToAction("Login", "Account");
-
         }
 
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel register)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(new LoginViewModel());
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
