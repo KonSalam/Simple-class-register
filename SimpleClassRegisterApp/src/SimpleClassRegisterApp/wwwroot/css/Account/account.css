@@ -1,0 +1,10 @@
+﻿
+input,
+select,
+textarea {
+    width: auto;
+}
+
+.btn-success {
+    margin-left: 50px;
+}

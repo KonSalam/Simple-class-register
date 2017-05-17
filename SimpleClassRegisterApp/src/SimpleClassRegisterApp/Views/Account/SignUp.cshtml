@@ -1,0 +1,62 @@
+﻿@model SimpleClassRegisterApp.Models.Account.SignUpViewModel
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/Account/account.css" />
+}
+
+<div class="container">
+
+    <div class="page-header">
+        <h3 class="text-center">Registration form</h3>
+    </div>
+
+    <form class="form-horizontal" asp-action="SignUp">
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" asp-for="FirstName"></label>
+            <div class="col-sm-8">
+                <input type="text" asp-for="FirstName" placeholder="Enter First Name" class="input-validation-error form-control" />
+                <span asp-validation-for="FirstName" class="text-danger field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" asp-for="LastName"></label>
+            <div class="col-sm-8">
+                <input type="text" asp-for="LastName" placeholder="Enter Last Name" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" asp-for="EmailAddress"></label>
+            <div class="col-sm-8">
+                <input type="email" asp-for="EmailAddress" placeholder="Enter email" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" asp-for="Password"></label>
+            <div class="col-sm-8">
+                <input type="password" asp-for="Password" placeholder="Enter password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" asp-for="ConfirmPassword"></label>
+            <div class="col-sm-8">
+                <input type="password" asp-for="ConfirmPassword" placeholder="Enter confirmation password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger field-validation-error"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-6">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+
+    </form>
+</div>
