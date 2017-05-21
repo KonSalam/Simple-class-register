@@ -1,4 +1,7 @@
 ﻿{
+  "ConnectionStrings": {
+    "ClassRegisterDataContext": "Server=(localdb)\\mssqllocaldb;Database=ClassRegister;Trusted_Connection=True;"
+  },
   "FeatureToggles": {
     "EnableDeveloperExceptions": true
   }
