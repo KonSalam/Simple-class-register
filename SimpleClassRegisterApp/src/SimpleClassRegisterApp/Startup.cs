@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using SimpleClassRegisterApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleClassRegisterApp
 {
@@ -32,6 +34,12 @@ namespace SimpleClassRegisterApp
             {
                 EnableDeveloperExceptions =
                    configuration.GetValue<bool>("FeatureToggles:EnableDeveloperExceptions")
+            });
+
+            services.AddDbContext<ClassRegisterDataContext>(options =>
+            {
+                var connectionString = configuration.GetConnectionString("ClassRegisterDataContext");
+                options.UseSqlServer(connectionString);
             });
         }
 
