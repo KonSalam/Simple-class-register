@@ -13,7 +13,7 @@ namespace SimpleClassRegisterApp.Models
         public string Mail { get; set; }
         public ICollection<SubjectCard> SubjectCards { get; set; }
 
-        public int ClassID { get; set; }
+        public int? ClassID { get; set; }
         public Class Class { get; set; }
     }
 }
