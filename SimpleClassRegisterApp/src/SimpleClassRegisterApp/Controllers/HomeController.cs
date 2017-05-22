@@ -21,5 +21,10 @@ namespace SimpleClassRegisterApp.Controllers
             return View();
         }
 
+        public IActionResult IdentityError()
+        {
+            return View();
+        }
+
     }
 }

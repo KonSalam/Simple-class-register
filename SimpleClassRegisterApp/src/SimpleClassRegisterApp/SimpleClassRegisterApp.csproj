@@ -47,8 +47,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Services\" />
-  </ItemGroup>
-
 </Project>

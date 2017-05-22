@@ -33,10 +33,9 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a><span class="glyphicon glyphicon-envelope"></span> @User.Identity.Name</a></li>
+                        <li><a><span class="glyphicon glyphicon-envelope"></span> Hello @User.Identity.Name</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
-
                 }
                 else
                 {

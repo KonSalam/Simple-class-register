@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.DataContext;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SimpleClassRegisterApp.Models.Services;
+using SimpleClassRegisterApp.Models.Services.Interfaces;
 
 namespace SimpleClassRegisterApp
 {
@@ -37,9 +39,10 @@ namespace SimpleClassRegisterApp
                    configuration.GetValue<bool>("FeatureToggles:EnableDeveloperExceptions")
             });
 
+            //DbContext
             services.AddDbContext<ClassRegisterDataContext>(options =>
             {
-                   var connectionString = configuration.GetConnectionString("ClassRegisterDataContext");
+                var connectionString = configuration.GetConnectionString("ClassRegisterDataContext");
                 options.UseSqlServer(connectionString);
             });
 
@@ -49,8 +52,18 @@ namespace SimpleClassRegisterApp
                 options.UseSqlServer(connectionString);
             });
 
+            //Identity Options
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddEntityFrameworkStores<IdentityDataContext>();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Cookies.ApplicationCookie.LoginPath = new PathString("/Home/IdentityError");
+                opt.Cookies.ApplicationCookie.AccessDeniedPath = new PathString("/Home/IdentityError");
+            });
+
+            //Services DI
+            services.AddTransient<IAccountService, AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

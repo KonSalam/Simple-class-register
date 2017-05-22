@@ -4,34 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SimpleClassRegisterApp.Models.ViewModels;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleClassRegisterApp.Models.DataContext;
 using SimpleClassRegisterApp.Models;
+using SimpleClassRegisterApp.Models.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SimpleClassRegisterApp.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signinManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ClassRegisterDataContext _db;
+        private readonly IAccountService _accountService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManager, ClassRegisterDataContext db)
+        public AccountController(IAccountService accountService)
         {
-            _userManager = userManager;
-            _signinManager = signinManager;
-            _db = db;
+            _accountService = accountService;
         }
 
+        [AllowAnonymous]
         public IActionResult SignUp()
         {
             return View(new SignUpViewModel());
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignUp(SignUpViewModel registration)
         {
             if (!ModelState.IsValid)
@@ -39,20 +38,7 @@ namespace SimpleClassRegisterApp.Controllers
                 return View(registration);
             }
 
-            var newUser = new IdentityUser
-            {
-                Email = registration.EmailAddress,
-                UserName = registration.EmailAddress,
-            };
-
-            var newStudent = new Student
-            {
-                FirstName = registration.FirstName,
-                LastName = registration.LastName,
-                Mail = registration.EmailAddress
-            };
-
-            var result = await _userManager.CreateAsync(newUser, registration.Password);
+            var result = await _accountService.RegisterUser(registration);
 
             if (!result.Succeeded)
             {
@@ -64,18 +50,19 @@ namespace SimpleClassRegisterApp.Controllers
                 return View();
             }
 
-            _db.Students.Add(newStudent);
-            _db.SaveChanges();
+            _accountService.RegisterStudent(registration);
 
             return RedirectToAction("Login", "Account");
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel login)
         {
             if (!ModelState.IsValid)
@@ -83,10 +70,7 @@ namespace SimpleClassRegisterApp.Controllers
                 return View();
             }
 
-            var result = await _signinManager.PasswordSignInAsync(
-                login.EmailAddress, login.Password,
-                login.RememberMe, false
-            );
+            var result = await _accountService.LoginUser(login);
 
             if (!result.Succeeded)
             {
@@ -99,7 +83,7 @@ namespace SimpleClassRegisterApp.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _signinManager.SignOutAsync();
+            await _accountService.LogoutUser();
             return RedirectToAction("Index", "Home");
         }
     }
