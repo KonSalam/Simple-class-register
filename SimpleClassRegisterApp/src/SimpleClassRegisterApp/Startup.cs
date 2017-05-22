@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using SimpleClassRegisterApp.Models;
 using Microsoft.EntityFrameworkCore;
+using SimpleClassRegisterApp.Models.DataContext;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SimpleClassRegisterApp
 {
@@ -38,9 +39,18 @@ namespace SimpleClassRegisterApp
 
             services.AddDbContext<ClassRegisterDataContext>(options =>
             {
-                var connectionString = configuration.GetConnectionString("ClassRegisterDataContext");
+                   var connectionString = configuration.GetConnectionString("ClassRegisterDataContext");
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddDbContext<IdentityDataContext>(options =>
+            {
+                var connectionString = configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(connectionString);
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+               .AddEntityFrameworkStores<IdentityDataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +71,8 @@ namespace SimpleClassRegisterApp
 
                 await next();
             });
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {

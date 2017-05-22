@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleClassRegisterApp.Models
+namespace SimpleClassRegisterApp.Models.DataContext
 {
     public class ClassRegisterDataContext : DbContext
     {
