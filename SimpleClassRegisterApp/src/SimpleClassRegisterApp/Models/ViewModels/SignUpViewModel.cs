@@ -9,11 +9,11 @@ namespace SimpleClassRegisterApp.Models.ViewModels
     public class SignUpViewModel
     {
 
-        [Required(ErrorMessage = "First Name is Required")]
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last Name is Required")]
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
@@ -21,6 +21,10 @@ namespace SimpleClassRegisterApp.Models.ViewModels
         [EmailAddress, MaxLength(500)]
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
+
+        [Required]
+        [Display(Name = "Account Type")]
+        public string AccountType { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

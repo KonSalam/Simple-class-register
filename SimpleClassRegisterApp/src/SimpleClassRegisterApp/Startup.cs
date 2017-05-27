@@ -13,6 +13,7 @@ using SimpleClassRegisterApp.Models.DataContext;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.Services;
 using SimpleClassRegisterApp.Models.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace SimpleClassRegisterApp
 {
@@ -67,7 +68,7 @@ namespace SimpleClassRegisterApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FeatureToggles features)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FeatureToggles features, RoleManager<IdentityRole> roleManager)
         {
             loggerFactory.AddConsole();
             app.UseExceptionHandler("/Home/Error");
@@ -77,14 +78,6 @@ namespace SimpleClassRegisterApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path.Value.Contains("invalid"))
-                    throw new Exception("ERROR!");
-
-                await next();
-            });
-
             app.UseIdentity();
 
             app.UseMvc(routes =>
@@ -93,6 +86,16 @@ namespace SimpleClassRegisterApp
             });
 
             app.UseFileServer();
+
+            RolesData.CreateRoles(roleManager).Wait();
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.Value.Contains("invalid"))
+                    throw new Exception("ERROR!");
+
+                await next();
+            });
         }
     }
 }

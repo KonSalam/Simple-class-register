@@ -46,12 +46,8 @@ namespace SimpleClassRegisterApp.Controllers
                 {
                     ModelState.AddModelError("PasswordError", error);
                 }
-
                 return View();
             }
-
-            _accountService.RegisterStudent(registration);
-
             return RedirectToAction("Login", "Account");
         }
 

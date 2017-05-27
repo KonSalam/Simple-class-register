@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace SimpleClassRegisterApp.Models.Services.Interfaces
         Task LogoutUser();
         Task<SignInResult> LoginUser(LoginViewModel login);
         Task<IdentityResult> RegisterUser(SignUpViewModel registration);
+        Task AddUserRole(IdentityUser newUser, SignUpViewModel registration);
         void RegisterStudent(SignUpViewModel registration);
+        void RegisterTeacher(SignUpViewModel registration);
     }
 }

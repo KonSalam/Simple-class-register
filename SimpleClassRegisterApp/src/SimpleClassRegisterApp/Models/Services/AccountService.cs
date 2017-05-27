@@ -14,12 +14,15 @@ namespace SimpleClassRegisterApp.Models.Services
     {
         private readonly SignInManager<IdentityUser> _signinManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ClassRegisterDataContext _db;
-        
-        public AccountService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManager, ClassRegisterDataContext db)
+
+        public AccountService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signinManager,
+            RoleManager<IdentityRole> roleManager, ClassRegisterDataContext db)
         {
             _userManager = userManager;
             _signinManager = signinManager;
+            _roleManager = roleManager;
             _db = db;
         }
 
@@ -33,11 +36,6 @@ namespace SimpleClassRegisterApp.Models.Services
             return result;
         }
 
-        public async Task LogoutUser()
-        {
-            await _signinManager.SignOutAsync();
-        }
-
         public async Task<IdentityResult> RegisterUser(SignUpViewModel registration)
         {
             var newUser = new IdentityUser
@@ -46,16 +44,28 @@ namespace SimpleClassRegisterApp.Models.Services
                 UserName = registration.EmailAddress,
             };
 
-            var newStudent = new Student
+            var createResult = await _userManager.CreateAsync(newUser, registration.Password);
+
+            if (createResult.Succeeded)
             {
-                FirstName = registration.FirstName,
-                LastName = registration.LastName,
-                Mail = registration.EmailAddress
-            };
+                await AddUserRole(newUser, registration);
+            }
 
-            var result = await _userManager.CreateAsync(newUser, registration.Password);
+            return createResult;
+        }
 
-            return result;
+        public async Task AddUserRole(IdentityUser newUser, SignUpViewModel registration)
+        {
+            if (registration.AccountType == "Student")
+            {
+                await _userManager.AddToRoleAsync(newUser, "Student");
+                RegisterStudent(registration);
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(newUser, "Teacher");
+                RegisterTeacher(registration);
+            }
         }
 
         public void RegisterStudent(SignUpViewModel registration)
@@ -69,6 +79,24 @@ namespace SimpleClassRegisterApp.Models.Services
 
             _db.Students.Add(newStudent);
             _db.SaveChanges();
+        }
+
+        public void RegisterTeacher(SignUpViewModel registration)
+        {
+            var newTeacher = new Teacher
+            {
+                FirstName = registration.FirstName,
+                LastName = registration.LastName,
+                Mail = registration.EmailAddress
+            };
+
+            _db.Teachers.Add(newTeacher);
+            _db.SaveChanges();
+        }
+
+        public async Task LogoutUser()
+        {
+            await _signinManager.SignOutAsync();
         }
 
     }
