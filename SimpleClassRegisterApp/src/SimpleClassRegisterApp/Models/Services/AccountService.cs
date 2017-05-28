@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.DataContext;
 using SimpleClassRegisterApp.Models.Services.Interfaces;
-using SimpleClassRegisterApp.Models.ViewModels;
+using SimpleClassRegisterApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

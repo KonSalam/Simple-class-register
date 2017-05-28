@@ -1,3 +1,18 @@
 ﻿@section Scripts {
 
 }
+
+<div class="jumbotron">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2>Hi @User.Identity.Name</h2>
+        @:&nbsp;
+        <p>Go to class section if you want to check your marks.</p>
+    }
+    else
+    {
+        <h2>Hi User</h2>
+        @:&nbsp;
+        <p>Please register if you want to use this class register.</p>
+    }
+</div>

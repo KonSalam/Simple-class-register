@@ -1,0 +1,43 @@
+﻿@model SimpleClassRegisterApp.ViewModels.StudentClassesViewModel
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/NewFolder/studentClass.css" />
+    <script src="~/scripts/StudentClasses.js"></script>
+}
+
+@if (Model.Student.ClassID == null)
+{
+    <h3 class="text-center">Please choose your class!</h3>
+
+    <div class="container body-content">
+        <div class="list-group classes">
+            @foreach (var schoolClass in Model.StudentClasses)
+            {
+                <a href="" class="list-group-item"> @schoolClass.Identification</a>
+            }
+        </div>
+    </div>
+
+}
+else
+{
+
+    <h3 class="text-center">Your class has been selected!</h3>
+
+    <div class="container body-content">
+        <div class="list-group classes">
+            @foreach (var schoolClass in Model.StudentClasses)
+            {
+                if (Model.Student.Class.Identification == schoolClass.Identification)
+                {
+                    <li class="list-group-item active">@schoolClass.Identification</li>
+                }
+                else
+                {
+                    <li class="list-group-item">@schoolClass.Identification</li>
+                }
+            }
+        </div>
+    </div>
+
+}

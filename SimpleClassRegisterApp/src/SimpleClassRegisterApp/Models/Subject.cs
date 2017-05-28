@@ -11,7 +11,7 @@ namespace SimpleClassRegisterApp.Models
         public string Name { get; set; }
         ICollection<SubjectCard> SubjectCards { get; set; }
 
-        public int TeacherID { get; set; }
+        public int? TeacherID { get; set; }
         public Teacher Teacher { get; set; }
     }
 }

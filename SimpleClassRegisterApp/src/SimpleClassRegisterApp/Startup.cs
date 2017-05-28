@@ -65,10 +65,11 @@ namespace SimpleClassRegisterApp
 
             //Services DI
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IStudentClassesService, StudentClassesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FeatureToggles features, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, FeatureToggles features, RoleManager<IdentityRole> roleManager,ClassRegisterDataContext registerContext)
         {
             loggerFactory.AddConsole();
             app.UseExceptionHandler("/Home/Error");
@@ -87,8 +88,6 @@ namespace SimpleClassRegisterApp
 
             app.UseFileServer();
 
-            RolesData.CreateRoles(roleManager).Wait();
-
             app.Use(async (context, next) =>
             {
                 if (context.Request.Path.Value.Contains("invalid"))
@@ -96,6 +95,9 @@ namespace SimpleClassRegisterApp
 
                 await next();
             });
+
+            RolesData.CreateRoles(roleManager).Wait();
+            DbInitializer.Initialize(registerContext);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SimpleClassRegisterApp.Models.ViewModels;
+using SimpleClassRegisterApp.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models;
 using SimpleClassRegisterApp.Models.Services.Interfaces;

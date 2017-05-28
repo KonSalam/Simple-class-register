@@ -26,9 +26,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Classes</a></li>
+
+                    <li><a asp-area="" asp-controller="StudentClasses" asp-action="Index">Classes</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Marks">Marks</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Comments</a></li>
+
                 </ul>
                 @if (User.Identity.IsAuthenticated)
                 {
