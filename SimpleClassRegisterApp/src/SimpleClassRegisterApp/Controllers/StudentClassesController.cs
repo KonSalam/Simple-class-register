@@ -31,7 +31,7 @@ namespace SimpleClassRegisterApp.Controllers
         public IActionResult Index([FromBody]string identification)
         {
             _studentClassesService.SetClasses(identification, User.Identity.Name);
-            return RedirectToAction("Index"); 
+            return Json(Url.Action("Index", "StudentClasses"));
         }
     }
 }

@@ -1,19 +1,20 @@
 ﻿
+$(document).ready(function () {
 
-$(document).on('click', '.list-group-item', function (evt) {
-    var identification = $(this).text().trim();
-    setClass(identification.toString());
-});
+    $(document).on('click', '.to-choose', function (evt) {
+        evt.preventDefault(); 
+        var identification = $(this).text().trim();
 
-function setClass(value) {
-    $.ajax({
-        url: "/StudentClasses/Index",
-        type: 'POST',
-        dataType: "json",
-        data: JSON.stringify(value),
-        contentType: 'application/json',
-        success: function (obj) {
-            alert('Suceeded');
-        }
+        $.ajax({
+            url: "/StudentClasses/Index",
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify(identification),
+            contentType: 'application/json',
+            success: function (data) {
+                window.location.href = data;
+            }
+        });
     });
-}
+
+});
