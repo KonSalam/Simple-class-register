@@ -25,80 +25,52 @@ namespace SimpleClassRegisterApp.Models.Services
 
         public async Task<StudentClassesViewModel> GetAllClasses(string user)
         {
-            try
-            {
-                var classes = await _db.Classes.ToListAsync();
-                var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
+            var classes = await _db.Classes.ToListAsync();
+            var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
 
-                var studentClassesViewModel = new StudentClassesViewModel
-                {
-                    StudentClasses = classes,
-                    Student = student
-                };
-
-                return studentClassesViewModel;
-            }
-            catch (Exception ex)
+            var studentClassesViewModel = new StudentClassesViewModel
             {
-                throw ex;
-            }
+                StudentClasses = classes,
+                Student = student
+            };
+
+            return studentClassesViewModel;
         }
 
         public void SetClasses(string identification, string user)
         {
-            try
-            {
-                var classes =  _db.Classes.FirstOrDefault(x => x.Identification == identification);
-                var student =  _db.Students.FirstOrDefault(x => x.Mail == user);
 
-                student.ClassID = classes.ClassID;
-                _db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            var classes = _db.Classes.FirstOrDefault(x => x.Identification == identification);
+            var student = _db.Students.FirstOrDefault(x => x.Mail == user);
+
+            student.ClassID = classes.ClassID;
+            _db.SaveChanges();
         }
 
         public void SetSubjectsCardsToStudent(string user)
         {
-            try
-            {
-                var subjects = _db.Subjects.ToList();
-                var student =  _db.Students.FirstOrDefault(x => x.Mail == user);
+            var subjects = _db.Subjects.ToList();
+            var student = _db.Students.FirstOrDefault(x => x.Mail == user);
 
-                foreach (Subject subject in subjects)
+            foreach (Subject subject in subjects)
+            {
+                _db.SubjectCards.Add(new SubjectCard
                 {
-                    _db.SubjectCards.Add(new SubjectCard
-                    {
-                        StudentID = student.StudentID,
-                        SubjectID = subject.SubjectID
-                    });
-                }
-
-                _db.Students.Include(x => x.SubjectCards).ToList();
-                _db.SaveChanges();
-
+                    StudentID = student.StudentID,
+                    SubjectID = subject.SubjectID
+                });
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            _db.Students.Include(x => x.SubjectCards).ToList();
+            _db.SaveChanges();
         }
 
         public async Task<IEnumerable<SubjectCard>> GetSubjectsMarks(string user)
         {
-            try
-            {
-                var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
-                var subjectsCards =  _db.SubjectCards.Include(s => s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
+            var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
+            var subjectsCards = _db.SubjectCards.Include(s => s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
 
-                return subjectsCards;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return subjectsCards;
         }
 
     }
