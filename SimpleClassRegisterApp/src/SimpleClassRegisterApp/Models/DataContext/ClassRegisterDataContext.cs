@@ -19,5 +19,11 @@ namespace SimpleClassRegisterApp.Models.DataContext
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>().HasMany(p => p.SubjectCards).WithOne(c => c.Student) .HasForeignKey(c => c.StudentID);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

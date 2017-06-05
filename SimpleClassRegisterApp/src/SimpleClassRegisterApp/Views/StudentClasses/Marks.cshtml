@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SimpleClassRegisterApp.Models.SubjectCard>
+
+@section Scripts {
+    <link rel="stylesheet" href="~/css/NewFolder/studentClass.css" />
+    <script src="~/scripts/StudentClasses.js"></script>
+}
+
+<br />
+<div class="page-header">
+    <h3>Your marks:</h3>
+</div>
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Subject</th>
+            <th class="text-center">Marks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var subjectCard in Model)
+        {
+        <tr>
+            <td class="col-sm-2 col-xs-2 text-center">@subjectCard.Subject.Name</td>
+            <td class="col-sm-10">
+                @foreach(var mark in subjectCard.Marks)
+                {
+                    <p>@mark.Grade</p>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

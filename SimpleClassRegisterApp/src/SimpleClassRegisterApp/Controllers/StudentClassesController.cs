@@ -11,7 +11,6 @@ using SimpleClassRegisterApp.Models.Services.Interfaces;
 namespace SimpleClassRegisterApp.Controllers
 {
     [Authorize(Roles ="Student")]
-
     public class StudentClassesController : Controller
     {
         private readonly IStudentClassesService _studentClassesService;
@@ -22,16 +21,23 @@ namespace SimpleClassRegisterApp.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_studentClassesService.GetAllClasses(User.Identity.Name));
+            return View(await _studentClassesService.GetAllClasses(User.Identity.Name));
         }
 
         [HttpPost]
         public IActionResult Index([FromBody]string identification)
         {
-            _studentClassesService.SetClasses(identification, User.Identity.Name);
+             _studentClassesService.SetClasses(identification, User.Identity.Name);
+             _studentClassesService.SetSubjectsCardsToStudent(User.Identity.Name);
             return Json(Url.Action("Index", "StudentClasses"));
         }
+
+        public async Task<IActionResult> Marks()
+        {
+            return View(await _studentClassesService.GetSubjectsMarks(User.Identity.Name));
+        }
+
     }
 }

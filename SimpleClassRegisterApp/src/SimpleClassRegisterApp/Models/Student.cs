@@ -15,5 +15,10 @@ namespace SimpleClassRegisterApp.Models
 
         public int? ClassID { get; set; }
         public Class Class { get; set; }
+
+        public Student()
+        {
+            SubjectCards = new List<SubjectCard>();
+        }
     }
 }
