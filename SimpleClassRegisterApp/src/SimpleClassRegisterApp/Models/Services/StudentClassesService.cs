@@ -43,7 +43,7 @@ namespace SimpleClassRegisterApp.Models.Services
             var classes = _db.Classes.FirstOrDefault(x => x.Identification == identification);
             var student = _db.Students.FirstOrDefault(x => x.Mail == user);
 
-            student.ClassID = classes.ClassID;
+            student.Class = classes;
             _db.SaveChanges();
         }
 
@@ -54,10 +54,12 @@ namespace SimpleClassRegisterApp.Models.Services
 
             foreach (Subject subject in subjects)
             {
+                var teacherSubject = _db.TeachersSubjects.FirstOrDefault(x => x.ClassID == student.ClassID && x.SubjectID == subject.SubjectID);
+
                 _db.SubjectCards.Add(new SubjectCard
                 {
                     StudentID = student.StudentID,
-                    SubjectID = subject.SubjectID
+                    TeacherSubject = teacherSubject
                 });
             }
 
@@ -68,7 +70,7 @@ namespace SimpleClassRegisterApp.Models.Services
         public async Task<IEnumerable<SubjectCard>> GetSubjectsMarks(string user)
         {
             var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
-            var subjectsCards = _db.SubjectCards.Include(s => s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
+            var subjectsCards = _db.SubjectCards.Include(s => s.TeacherSubject).ThenInclude(s=>s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
 
             return subjectsCards;
         }

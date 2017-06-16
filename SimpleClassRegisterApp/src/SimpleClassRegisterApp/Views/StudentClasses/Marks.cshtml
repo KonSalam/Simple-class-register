@@ -2,7 +2,7 @@
 
 @section Scripts {
     <link rel="stylesheet" href="~/css/NewFolder/studentClass.css" />
-    <script src="~/scripts/StudentClasses.js"></script>
+    <script src="~/scripts/Marks.js"></script>
 }
 
 <br />
@@ -16,19 +16,21 @@
         <tr>
             <th class="text-center">Subject</th>
             <th class="text-center">Marks</th>
+            <th class="text-center">Average</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var subjectCard in Model)
         {
         <tr>
-            <td class="col-sm-2 col-xs-2 text-center">@subjectCard.Subject.Name</td>
-            <td class="col-sm-10">
-                @foreach(var mark in subjectCard.Marks)
+            <td class="col-sm-2 col-xs-2 text-center">@subjectCard.TeacherSubject.Subject.Name</td>
+            <td class="col-sm-9">
+                @foreach (var mark in subjectCard.Marks)
                 {
-                    <p>@mark.Grade</p>
+                    <a href="#" data-toggle="tooltip" title="Inseration Date: @mark.InsertionDate.ToString("d")">@mark.Grade</a>
                 }
             </td>
+            <td class="col-sm-1"></td>
         </tr>
         }
     </tbody>

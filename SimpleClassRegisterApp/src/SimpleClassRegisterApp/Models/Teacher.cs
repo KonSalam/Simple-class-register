@@ -11,6 +11,6 @@ namespace SimpleClassRegisterApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Mail { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<TeacherSubject> TeachersSubjects { get; set; }
     }
 }

@@ -16,6 +16,23 @@ namespace SimpleClassRegisterApp
                 return;
             }
 
+            var subjects = new Subject[]
+            {
+                new Subject{Name="Math"},
+                new Subject{Name="English"},
+                new Subject{Name="Polish"},
+                new Subject{Name="Chemistry"},
+                new Subject{Name="Biology"},
+                new Subject{Name="Geography"},
+                new Subject{Name="Physics" }
+            };
+
+            foreach (Subject element in subjects)
+            {
+                context.Subjects.Add(element);
+            }
+            context.SaveChanges();
+
             var classes = new Class[]
             {
                 new Class{Identification="1 A"},
@@ -32,20 +49,19 @@ namespace SimpleClassRegisterApp
             }
             context.SaveChanges();
 
-            var subjects = new Subject[]
-            {
-                new Subject{Name="Math"},
-                new Subject{Name="English"},
-                new Subject{Name="Polish"},
-                new Subject{Name="Chemistry"},
-                new Subject{Name="Biology"},
-                new Subject{Name="Geography"},
-                new Subject{Name="Physics" }
-            };
+            var classes2 = context.Classes.ToList();
+            var subjects2 = context.Subjects.ToList();
 
-            foreach (Subject element in subjects)
+            foreach (Class element in classes2)
             {
-                context.Subjects.Add(element);
+                foreach (Subject subject in subjects2)
+                {
+                    context.TeachersSubjects.Add(new TeacherSubject
+                    {
+                        ClassID = element.ClassID,
+                        SubjectID = subject.SubjectID
+                    });
+                }
             }
             context.SaveChanges();
         }
