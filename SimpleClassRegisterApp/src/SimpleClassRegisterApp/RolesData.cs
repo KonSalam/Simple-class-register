@@ -11,7 +11,8 @@ namespace SimpleClassRegisterApp
     {
         private static readonly string[] roles = new[] {
             "Teacher",
-            "Student"
+            "Student",
+            "Administrator"
         };
 
         public static async Task CreateRoles(RoleManager<IdentityRole> roleManager)

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleClassRegisterApp.Models.DataContext
 {
-    public class ClassRegisterDataContext : DbContext
+    public class ClassRegisterDataContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Class> Classes { get; set; }
         public DbSet<Student> Students { get; set; }

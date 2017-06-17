@@ -47,15 +47,9 @@ namespace SimpleClassRegisterApp
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddDbContext<IdentityDataContext>(options =>
-            {
-                var connectionString = configuration.GetConnectionString("IdentityDataContext");
-                options.UseSqlServer(connectionString);
-            });
-
             //Identity Options
             services.AddIdentity<IdentityUser, IdentityRole>()
-               .AddEntityFrameworkStores<IdentityDataContext>();
+               .AddEntityFrameworkStores<ClassRegisterDataContext>();
 
             services.Configure<IdentityOptions>(opt =>
             {
