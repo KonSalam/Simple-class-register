@@ -54,12 +54,12 @@ namespace SimpleClassRegisterApp.Models.Services
 
             foreach (Subject subject in subjects)
             {
-                var teacherSubject = _db.TeachersSubjects.FirstOrDefault(x => x.ClassID == student.ClassID && x.SubjectID == subject.SubjectID);
+                var teacherSubject = _db.TeacherSubjectClasses.FirstOrDefault(x => x.ClassID == student.ClassID && x.SubjectID == subject.SubjectID);
 
                 _db.SubjectCards.Add(new SubjectCard
                 {
                     StudentID = student.StudentID,
-                    TeacherSubject = teacherSubject
+                    TeacherSubjectClasses = teacherSubject
                 });
             }
 
@@ -70,7 +70,7 @@ namespace SimpleClassRegisterApp.Models.Services
         public async Task<IEnumerable<SubjectCard>> GetSubjectsMarks(string user)
         {
             var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
-            var subjectsCards = _db.SubjectCards.Include(s => s.TeacherSubject).ThenInclude(s=>s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
+            var subjectsCards = _db.SubjectCards.Include(s => s.TeacherSubjectClasses).ThenInclude(s=>s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
 
             return subjectsCards;
         }

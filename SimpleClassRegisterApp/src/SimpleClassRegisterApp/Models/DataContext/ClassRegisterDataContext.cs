@@ -15,7 +15,8 @@ namespace SimpleClassRegisterApp.Models.DataContext
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Mark> Marks { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<TeacherSubject> TeachersSubjects { get; set; }
+        public DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public DbSet<TeacherSubjectClasses> TeacherSubjectClasses { get; set; }
 
         public ClassRegisterDataContext(DbContextOptions<ClassRegisterDataContext> options) : base(options)
         {

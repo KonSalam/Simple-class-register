@@ -56,7 +56,7 @@ namespace SimpleClassRegisterApp
             {
                 foreach (Subject subject in subjects2)
                 {
-                    context.TeachersSubjects.Add(new TeacherSubject
+                    context.TeacherSubjectClasses.Add(new TeacherSubjectClasses
                     {
                         ClassID = element.ClassID,
                         SubjectID = subject.SubjectID

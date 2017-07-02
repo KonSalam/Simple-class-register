@@ -23,7 +23,7 @@
         @foreach(var subjectCard in Model)
         {
         <tr>
-            <td class="col-sm-2 col-xs-2 text-center">@subjectCard.TeacherSubject.Subject.Name</td>
+            <td class="col-sm-2 col-xs-2 text-center">@subjectCard.TeacherSubjectClasses.Subject.Name</td>
             <td class="col-sm-9">
                 @foreach (var mark in subjectCard.Marks)
                 {
