@@ -9,8 +9,8 @@ namespace SimpleClassRegisterApp.Models.Services.Interfaces
    public interface IStudentClassesService
     {
         Task<StudentClassesViewModel> GetAllClasses(string user);
-        void SetClasses(string identification, string user);
-        void SetSubjectsCardsToStudent(string user);
+        Task SetClasses(string identification, string user);
+        Task SetSubjectsCardsToStudent(string user);
         Task<IEnumerable<SubjectCard>> GetSubjectsMarks(string user);
     }
 }
