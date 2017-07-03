@@ -37,40 +37,39 @@ namespace SimpleClassRegisterApp.Models.Services
             return studentClassesViewModel;
         }
 
-        public void SetClasses(string identification, string user)
+        public async Task SetClasses(string identification, string user)
         {
-
-            var classes = _db.Classes.FirstOrDefault(x => x.Identification == identification);
-            var student = _db.Students.FirstOrDefault(x => x.Mail == user);
+            var classes = await _db.Classes.FirstOrDefaultAsync(x => x.Identification == identification);
+            var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
 
             student.Class = classes;
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
-        public void SetSubjectsCardsToStudent(string user)
+        public async Task SetSubjectsCardsToStudent(string user)
         {
-            var subjects = _db.Subjects.ToList();
-            var student = _db.Students.FirstOrDefault(x => x.Mail == user);
+            var subjects = await _db.Subjects.ToArrayAsync();
+            var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
 
             foreach (Subject subject in subjects)
             {
-                var teacherSubject = _db.TeacherSubjectClasses.FirstOrDefault(x => x.ClassID == student.ClassID && x.SubjectID == subject.SubjectID);
+                var teacherSubjectClasses = await _db.TeacherSubjectClasses.FirstOrDefaultAsync(x => x.ClassID == student.ClassID && x.SubjectID == subject.SubjectID);
 
-                _db.SubjectCards.Add(new SubjectCard
+                await _db.SubjectCards.AddAsync(new SubjectCard
                 {
                     StudentID = student.StudentID,
-                    TeacherSubjectClasses = teacherSubject
+                    TeacherSubjectClasses = teacherSubjectClasses
                 });
             }
 
             _db.Students.Include(x => x.SubjectCards).ToList();
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<SubjectCard>> GetSubjectsMarks(string user)
         {
             var student = await _db.Students.FirstOrDefaultAsync(x => x.Mail == user);
-            var subjectsCards = _db.SubjectCards.Include(s => s.TeacherSubjectClasses).ThenInclude(s=>s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
+            var subjectsCards = _db.SubjectCards.Include(s => s.TeacherSubjectClasses).ThenInclude(s => s.Subject).Where(s => s.StudentID == student.StudentID).Include(s => s.Marks);
 
             return subjectsCards;
         }

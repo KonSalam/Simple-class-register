@@ -27,10 +27,10 @@ namespace SimpleClassRegisterApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index([FromBody]string identification)
+        public async Task<IActionResult> Index([FromBody]string identification)
         {
-             _studentClassesService.SetClasses(identification, User.Identity.Name);
-             _studentClassesService.SetSubjectsCardsToStudent(User.Identity.Name);
+             await _studentClassesService.SetClasses(identification, User.Identity.Name);
+             await _studentClassesService.SetSubjectsCardsToStudent(User.Identity.Name);
             return Json(Url.Action("Index", "StudentClasses"));
         }
 
