@@ -27,9 +27,16 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
 
-                    <li><a asp-area="" asp-controller="StudentClasses" asp-action="Index">Classes</a></li>
-                    <li><a asp-area="" asp-controller="StudentClasses" asp-action="Marks">Marks</a></li>
-
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li><a asp-area="" asp-controller="TeacherSubjects" asp-action="Subjects">Subjects</a></li>
+                        <li><a asp-area="" asp-controller="TeacherClasses" asp-action="Classes">Classes</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="StudentClasses" asp-action="Index">Classes</a></li>
+                        <li><a asp-area="" asp-controller="StudentClasses" asp-action="Marks">Marks</a></li>
+                    }  
                 </ul>
                 @if (User.Identity.IsAuthenticated)
                 {

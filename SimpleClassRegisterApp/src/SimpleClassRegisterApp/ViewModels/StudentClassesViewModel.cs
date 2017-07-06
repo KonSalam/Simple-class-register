@@ -8,7 +8,7 @@ namespace SimpleClassRegisterApp.ViewModels
 {
     public class StudentClassesViewModel
     {
-       public IEnumerable<Class> StudentClasses { get; set; }
-       public Student Student { get; set; }
+        public IEnumerable<Class> StudentClasses { get; set; }
+        public Student Student { get; set; }
     }
 }
