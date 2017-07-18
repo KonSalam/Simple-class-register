@@ -61,6 +61,7 @@ namespace SimpleClassRegisterApp
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IStudentClassesService, StudentClassesService>();
             services.AddTransient<ITeacherSubjectsService, TeacherSubjectsService>();
+            services.AddTransient<ITeacherClassesService, TeacherClassesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

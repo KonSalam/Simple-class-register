@@ -10,6 +10,5 @@ namespace SimpleClassRegisterApp.ViewModels
     {
         public IEnumerable<Subject> Subjects { get; set; }
         public Teacher Teacher { get; set; }
-        public IEnumerable<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

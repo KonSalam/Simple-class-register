@@ -30,7 +30,7 @@
                     @if (User.IsInRole("Teacher"))
                     {
                         <li><a asp-area="" asp-controller="TeacherSubjects" asp-action="Subjects">Subjects</a></li>
-                        <li><a asp-area="" asp-controller="TeacherClasses" asp-action="Classes">Classes</a></li>
+                        <li><a asp-area="" asp-controller="TeacherSubjects" asp-action="Classes">Classes</a></li>
                     }
                     else
                     {
