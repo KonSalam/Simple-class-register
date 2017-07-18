@@ -26,6 +26,7 @@ namespace SimpleClassRegisterApp.Controllers
         [AllowAnonymous]
         public IActionResult SignUp()
         {
+            return View(new SignUpViewModel());
             return View(new TeacherClassesViewModel());
         }
 
