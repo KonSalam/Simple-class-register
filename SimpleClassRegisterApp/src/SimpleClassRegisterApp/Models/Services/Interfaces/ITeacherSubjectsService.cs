@@ -1,7 +1,4 @@
 ﻿using SimpleClassRegisterApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleClassRegisterApp.Models.Services.Interfaces
@@ -10,6 +7,5 @@ namespace SimpleClassRegisterApp.Models.Services.Interfaces
     {
         Task<TeacherSubjectsViewModel> GetAllSubjects(string user);
         Task AddTeacherSubject(string subjectName, string user);
-        Task<TeacherSubjectsViewModel> GetAllClasses(string user);
     }
 }

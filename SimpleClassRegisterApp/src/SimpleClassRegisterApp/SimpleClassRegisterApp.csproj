@@ -20,6 +20,7 @@
   <ItemGroup>
     <Content Include="wwwroot\css\Account\account.css" />
     <Content Include="wwwroot\css\Student\studentClass.css" />
+    <Content Include="wwwroot\css\Teacher\teacherClasses.css" />
     <Content Include="wwwroot\css\Teacher\teacherSubjects.css" />
     <Content Include="wwwroot\scripts\Marks.js" />
     <Content Include="wwwroot\scripts\StudentClasses.js" />

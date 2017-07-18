@@ -2,11 +2,11 @@
 $(document).ready(function () {
 
     $(document).on('click', '.to-choose', function (evt) {
-        evt.preventDefault(); 
+        evt.preventDefault();
         var subjectName = $(this).text().trim();
 
         $.ajax({
-            url: "/TeacherSubjects/Subjects",
+            url: "/Teacher/Subjects",
             type: 'POST',
             dataType: "json",
             data: JSON.stringify(subjectName),
