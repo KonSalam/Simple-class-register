@@ -5,7 +5,6 @@
 }
 
 <div class="container">
-
     <div class="page-header">
         <h3 class="text-center">Choose your courses:</h3>
     </div>
@@ -29,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-sm-4" asp-for="Classes"></label>
+            <label class="control-label col-sm-4" asp-for="Class"></label>
             <div class="col-sm-8">
                 <select asp-for="Class" class="form-control">
                     @foreach (var schoolclass in Model.Classes)
@@ -46,15 +45,14 @@
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
-
     </form>
 
-    <h2>Your courses:</h2>
+    <h2>Your chosen courses:</h2>
     <table class="table">
         <thead>
             <tr>
-                <th>Class</th>
-                <th>Subject</th>
+                <th>Class Name</th>
+                <th>Subject Name</th>
             </tr>
         </thead>
         <tbody>

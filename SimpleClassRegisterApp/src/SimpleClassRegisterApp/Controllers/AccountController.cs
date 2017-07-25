@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SimpleClassRegisterApp.ViewModels;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleClassRegisterApp.Models;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using SimpleClassRegisterApp.Servies.AccountServies.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

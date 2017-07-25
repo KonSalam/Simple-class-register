@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
 using SimpleClassRegisterApp.ViewModels;
+using SimpleClassRegisterApp.Services.TeacherServices.Interfaces;
 
 namespace SimpleClassRegisterApp.Controllers
 {
@@ -12,11 +12,13 @@ namespace SimpleClassRegisterApp.Controllers
     {
         private readonly ITeacherSubjectsService _teacherSubjectsService;
         private readonly ITeacherClassesService _teacherClassesService;
+        private readonly ITeacherMarksService _teacherMarksService;
 
-        public TeacherSubjectsController(ITeacherSubjectsService teacherSubjectsService, ITeacherClassesService teacherClassesService)
+        public TeacherSubjectsController(ITeacherSubjectsService teacherSubjectsService, ITeacherClassesService teacherClassesService, ITeacherMarksService teacherMarksService)
         {
             _teacherSubjectsService = teacherSubjectsService;
             _teacherClassesService = teacherClassesService;
+            _teacherMarksService = teacherMarksService;
         }
 
         [Route("Subjects")]
@@ -50,5 +52,35 @@ namespace SimpleClassRegisterApp.Controllers
             return RedirectToAction("Classes");
         }
 
+        [HttpPost, Route("AvailableSubjectsForClass")]
+        public async Task<IActionResult> AvailableSubjectsForClass([FromBody] string classId)
+        {
+            return Json(await _teacherClassesService.GetSubjectsAvailableForClass(classId, User.Identity.Name));
+        }
+
+
+        [Route("Marks")]
+        public async Task<IActionResult> Marks()
+        {
+            return View(await _teacherMarksService.GetTeacherSubjectClasses(User.Identity.Name));
+        }
+
+        [HttpPost, Route("Marks")]
+        public async Task<IActionResult> Marks(TeacherMarksViewModel teacherMarks) // nie wiem czy to bd potrzebne
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Marks");
+            }
+
+            var subject = (Request.Form["Subject"]).ToString();
+            var clas = (Request.Form["Class"]).ToString();
+
+            ViewData["subject"] = subject;
+            ViewData["clas"] = clas;
+
+            await _teacherMarksService.SendChoice(User.Identity.Name);
+            return RedirectToAction("Marks");
+        }
     }
 }

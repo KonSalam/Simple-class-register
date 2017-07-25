@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.DataContext;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleClassRegisterApp.Models.Services;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using SimpleClassRegisterApp.Servies.AccountServies;
+using SimpleClassRegisterApp.Servies.AccountServies.Interfaces;
+using SimpleClassRegisterApp.Servies.StudentServices.Interfaces;
+using SimpleClassRegisterApp.Servies.StudentServices;
+using SimpleClassRegisterApp.Services.TeacherServices.Interfaces;
+using SimpleClassRegisterApp.Services.TeacherServices;
 
 namespace SimpleClassRegisterApp
 {
@@ -62,6 +63,7 @@ namespace SimpleClassRegisterApp
             services.AddTransient<IStudentClassesService, StudentClassesService>();
             services.AddTransient<ITeacherSubjectsService, TeacherSubjectsService>();
             services.AddTransient<ITeacherClassesService, TeacherClassesService>();
+            services.AddTransient<ITeacherMarksService, TeacherMarksService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

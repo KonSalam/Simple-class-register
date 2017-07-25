@@ -1,7 +1,7 @@
 ﻿using SimpleClassRegisterApp.ViewModels;
 using System.Threading.Tasks;
 
-namespace SimpleClassRegisterApp.Models.Services.Interfaces
+namespace SimpleClassRegisterApp.Services.TeacherServices.Interfaces
 {
     public interface ITeacherSubjectsService
     {
