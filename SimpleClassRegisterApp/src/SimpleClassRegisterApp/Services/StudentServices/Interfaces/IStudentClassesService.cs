@@ -1,12 +1,11 @@
-﻿using SimpleClassRegisterApp.ViewModels;
-using System;
+﻿using SimpleClassRegisterApp.Models;
+using SimpleClassRegisterApp.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleClassRegisterApp.Models.Services.Interfaces
+namespace SimpleClassRegisterApp.Servies.StudentServices.Interfaces
 {
-   public interface IStudentClassesService
+    public interface IStudentClassesService
     {
         Task<StudentClassesViewModel> GetAllClasses(string user);
         Task SetClasses(string identification, string user);

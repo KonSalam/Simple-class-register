@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleClassRegisterApp.Models.DataContext;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
-using SimpleClassRegisterApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using System;
+using SimpleClassRegisterApp.Models;
+using SimpleClassRegisterApp.Models.DataContext;
+using SimpleClassRegisterApp.Servies.StudentServices.Interfaces;
+using SimpleClassRegisterApp.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleClassRegisterApp.Models.Services
+namespace SimpleClassRegisterApp.Servies.StudentServices
 {
     public class StudentClassesService : IStudentClassesService
     {

@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     $(document).on('click', '.to-choose', function (evt) {
         evt.preventDefault(); 
@@ -16,5 +15,4 @@ $(document).ready(function () {
             }
         });
     });
-
 });

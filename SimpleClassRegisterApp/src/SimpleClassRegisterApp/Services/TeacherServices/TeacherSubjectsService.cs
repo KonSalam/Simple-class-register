@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using SimpleClassRegisterApp.Models.DataContext;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
+﻿using SimpleClassRegisterApp.Models.DataContext;
 using SimpleClassRegisterApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using SimpleClassRegisterApp.Services.TeacherServices.Interfaces;
+using SimpleClassRegisterApp.Models;
 
-namespace SimpleClassRegisterApp.Models.Services
+namespace SimpleClassRegisterApp.Services.TeacherServices
 {
     public class TeacherSubjectsService : ITeacherSubjectsService
     {

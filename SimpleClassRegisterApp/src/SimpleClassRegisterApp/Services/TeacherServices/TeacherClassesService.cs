@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpleClassRegisterApp.Models.DataContext;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
+using SimpleClassRegisterApp.Services.TeacherServices.Interfaces;
 using SimpleClassRegisterApp.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using System;
 
-namespace SimpleClassRegisterApp.Models.Services
+namespace SimpleClassRegisterApp.Services.TeacherServices
 {
     public class TeacherClassesService : ITeacherClassesService
     {
@@ -30,6 +31,16 @@ namespace SimpleClassRegisterApp.Models.Services
             };
 
             return teacherClassesViewModel;
+        }
+
+        public async Task<List<string>> GetSubjectsAvailableForClass(string className, string user)
+        {
+            var classes = await _db.Classes.FirstOrDefaultAsync(x => x.Identification == className);
+            var teacher = await _db.Teachers.FirstOrDefaultAsync(x => x.Mail == user);
+            var availableSubjects = await _db.TeacherSubjectClasses.Where(x => x.ClassID == classes.ClassID && x.TeacherID==teacher.TeacherID)
+                .Select(x=>x.Subject.Name).ToListAsync();
+
+            return availableSubjects;
         }
 
         public async Task SetTeacherSubjectClasses(TeacherClassesViewModel teacherClasses, string user)

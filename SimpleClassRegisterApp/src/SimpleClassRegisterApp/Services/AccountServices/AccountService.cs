@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SimpleClassRegisterApp.Models;
 using SimpleClassRegisterApp.Models.DataContext;
-using SimpleClassRegisterApp.Models.Services.Interfaces;
+using SimpleClassRegisterApp.Servies.AccountServies.Interfaces;
 using SimpleClassRegisterApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace SimpleClassRegisterApp.Models.Services
+namespace SimpleClassRegisterApp.Servies.AccountServies
 {
     public class AccountService : IAccountService
     {

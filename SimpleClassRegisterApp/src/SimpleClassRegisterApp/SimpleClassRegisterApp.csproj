@@ -21,9 +21,14 @@
     <Content Include="wwwroot\css\Account\account.css" />
     <Content Include="wwwroot\css\Student\studentClass.css" />
     <Content Include="wwwroot\css\Teacher\teacherClasses.css" />
+    <Content Include="wwwroot\css\Teacher\teacherMarks.css" />
     <Content Include="wwwroot\css\Teacher\teacherSubjects.css" />
-    <Content Include="wwwroot\scripts\Marks.js" />
-    <Content Include="wwwroot\scripts\StudentClasses.js" />
+    <Content Include="wwwroot\scripts\ClassChoice.js" />
+    <Content Include="wwwroot\scripts\StudentScripts\StudentClasses.js" />
+    <Content Include="wwwroot\scripts\StudentScripts\StudentMarks.js" />
+    <Content Include="wwwroot\scripts\TeacherScripts\ClassChoice.js" />
+    <Content Include="wwwroot\scripts\TeacherScripts\TeacherClasses.js" />
+    <Content Include="wwwroot\scripts\TeacherScripts\TeacherSubjects.js" />
     <Content Include="wwwroot\scripts\TeacherSubjects.js" />
   </ItemGroup>
 
@@ -57,6 +62,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
     <PackageReference Include="Serilog" Version="2.4.0" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\TeacherSubjects\PartialView\" />
   </ItemGroup>
 
 </Project>
