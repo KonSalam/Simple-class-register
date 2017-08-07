@@ -22,7 +22,7 @@
                             {
                                 @foreach (var mark in subjectCard.Marks)
                                 {
-                                    @mark.Grade;
+                                    <a href="#" data-toggle="tooltip" title="Inseration Date: @mark.InsertionDate.ToString("d")">@mark.Grade</a>
                                 }
                             }
                         }
@@ -49,3 +49,7 @@ else
 
 <div id="addMarkModal">
 </div>
+
+<script>
+    $('[data-toggle="tooltip"]').tooltip();
+</script>

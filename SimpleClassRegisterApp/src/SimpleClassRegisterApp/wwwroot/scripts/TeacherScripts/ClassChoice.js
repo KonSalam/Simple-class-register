@@ -37,7 +37,6 @@
     });
 
     $(document).on('click', '.addMark', function (evt) {
-        console.log($(this).attr('id'))
 
         $.ajax({
             url: "/Teacher/AddMarkShowModal",
@@ -49,6 +48,20 @@
                 $('#myModal').modal('show');
             }
         });
+
+    });
+
+    $(document).on('click', '#submitMark', function () {
+
+        $.ajax({
+            url: "/Teacher/AddMark",
+            type: 'POST',
+            data: { subjectCardId: $('#subjectCard').val(), grade: $('#garde_list').val() },
+            success: function (response) {
+                window.location.href = response;
+            }
+        });
+
     });
 
 });

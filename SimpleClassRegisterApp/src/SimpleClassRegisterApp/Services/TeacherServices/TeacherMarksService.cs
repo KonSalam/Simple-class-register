@@ -65,7 +65,7 @@ namespace SimpleClassRegisterApp.Services.TeacherServices
             };
 
             await _db.Marks.AddAsync(mark);
-           // await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
     }

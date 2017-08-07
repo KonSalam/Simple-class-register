@@ -26,7 +26,6 @@
     <Content Include="wwwroot\scripts\StudentScripts\StudentClasses.js" />
     <Content Include="wwwroot\scripts\StudentScripts\StudentMarks.js" />
     <Content Include="wwwroot\scripts\TeacherScripts\ClassChoice.js" />
-    <Content Include="wwwroot\scripts\TeacherScripts\TeacherAddModal.js" />
     <Content Include="wwwroot\scripts\TeacherScripts\TeacherSubjects.js" />
   </ItemGroup>
 

@@ -79,8 +79,8 @@ namespace SimpleClassRegisterApp.Controllers
         [HttpPost, Route("AddMark")]
         public async Task<IActionResult> AddMark(int subjectCardId, int grade)
         {
-             await _teacherMarksService.AddMark(10, 5);
-            return Json(Url.Action("Subjects", "TeacherSubjects"));
+            await _teacherMarksService.AddMark(subjectCardId, grade);
+            return Json(Url.Action("Marks", "TeacherSubjects"));
         }
 
     }
