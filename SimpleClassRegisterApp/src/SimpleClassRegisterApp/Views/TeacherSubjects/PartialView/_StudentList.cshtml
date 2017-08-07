@@ -1,0 +1,51 @@
+﻿@model SimpleClassRegisterApp.ViewModels.TeacherMarksViewModel
+
+@if (Model.Students.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Add Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td class="col-sm-2 col-xs-2 text-left">@student.FirstName @student.LastName</td>
+                    <td class="col-sm-9">
+                        @foreach (var subjectCard in @student.SubjectCards)
+                        {
+                            @if (subjectCard.TeacherSubjectClasses.SubjectID == Model.Subjects.First().SubjectID)
+                            {
+                                @foreach (var mark in subjectCard.Marks)
+                                {
+                                    @mark.Grade;
+                                }
+                            }
+                        }
+                    </td>
+                    <td class="col-sm-1">
+                        @foreach (var subjectCard in @student.SubjectCards)
+                        {
+                            @if (subjectCard.TeacherSubjectClasses.SubjectID == Model.Subjects.First().SubjectID)
+                            {
+                                <a href="#" id="@subjectCard.SubjectCardID" class="addMark" data-target="#myModal" data-toggle="modal">Add</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 class="text-center">Sorry, this class hasn't any students.</h4>
+    <h4 class="text-center">Please change the class or subject.</h4>
+}
+
+<div id="addMarkModal">
+</div>

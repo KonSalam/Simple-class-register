@@ -1,9 +1,6 @@
 ﻿using SimpleClassRegisterApp.Models;
 using SimpleClassRegisterApp.Models.DataContext;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SimpleClassRegisterApp
 {
@@ -16,7 +13,7 @@ namespace SimpleClassRegisterApp
                 return;
             }
 
-            var subjects = new Subject[]
+            var newSubjects = new Subject[]
             {
                 new Subject{Name="Math"},
                 new Subject{Name="English"},
@@ -27,13 +24,13 @@ namespace SimpleClassRegisterApp
                 new Subject{Name="Physics" }
             };
 
-            foreach (Subject element in subjects)
+            foreach (Subject element in newSubjects)
             {
                 context.Subjects.Add(element);
             }
             context.SaveChanges();
 
-            var classes = new Class[]
+            var newClasses = new Class[]
             {
                 new Class{Identification="1 A"},
                 new Class{Identification="1 B"},
@@ -43,18 +40,18 @@ namespace SimpleClassRegisterApp
                 new Class{Identification="3 B"}
             };
 
-            foreach (Class element in classes)
+            foreach (Class element in newClasses)
             {
                 context.Classes.Add(element);
             }
             context.SaveChanges();
 
-            var classes2 = context.Classes.ToList();
-            var subjects2 = context.Subjects.ToList();
+            var classes = context.Classes.ToList();
+            var subjects = context.Subjects.ToList();
 
-            foreach (Class element in classes2)
+            foreach (Class element in classes)
             {
-                foreach (Subject subject in subjects2)
+                foreach (Subject subject in subjects)
                 {
                     context.TeacherSubjectClasses.Add(new TeacherSubjectClasses
                     {

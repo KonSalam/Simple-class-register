@@ -53,11 +53,10 @@ namespace SimpleClassRegisterApp.Controllers
         }
 
         [HttpPost, Route("AvailableSubjectsForClass")]
-        public async Task<IActionResult> AvailableSubjectsForClass([FromBody] string classId)
+        public async Task<IActionResult> AvailableSubjectsForClass([FromBody] int classId)
         {
             return Json(await _teacherClassesService.GetSubjectsAvailableForClass(classId, User.Identity.Name));
         }
-
 
         [Route("Marks")]
         public async Task<IActionResult> Marks()
@@ -66,21 +65,23 @@ namespace SimpleClassRegisterApp.Controllers
         }
 
         [HttpPost, Route("Marks")]
-        public async Task<IActionResult> Marks(TeacherMarksViewModel teacherMarks) // nie wiem czy to bd potrzebne
+        public async Task<IActionResult> StudentsForClassAndSubject(int classId, int subjectId)
         {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Marks");
-            }
-
-            var subject = (Request.Form["Subject"]).ToString();
-            var clas = (Request.Form["Class"]).ToString();
-
-            ViewData["subject"] = subject;
-            ViewData["clas"] = clas;
-
-            await _teacherMarksService.SendChoice(User.Identity.Name);
-            return RedirectToAction("Marks");
+            return PartialView("PartialView/_StudentList", await _teacherMarksService.GetClassStudents(classId, subjectId));
         }
+
+        [HttpPost, Route("AddMarkShowModal")]
+        public IActionResult AddMarkShowModal(int subjectCardId)
+        {
+            return PartialView("Modals/_AddMarkModal",subjectCardId);
+        }
+
+        [HttpPost, Route("AddMark")]
+        public async Task<IActionResult> AddMark(int subjectCardId, int grade)
+        {
+             await _teacherMarksService.AddMark(10, 5);
+            return Json(Url.Action("Subjects", "TeacherSubjects"));
+        }
+
     }
 }

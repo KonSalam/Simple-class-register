@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SimpleClassRegisterApp.Models;
 using SimpleClassRegisterApp.Models.DataContext;
 using SimpleClassRegisterApp.Services.TeacherServices.Interfaces;
 using SimpleClassRegisterApp.ViewModels;
@@ -33,12 +34,11 @@ namespace SimpleClassRegisterApp.Services.TeacherServices
             return teacherClassesViewModel;
         }
 
-        public async Task<List<string>> GetSubjectsAvailableForClass(string className, string user)
+        public async Task<List<Subject>> GetSubjectsAvailableForClass(int classId, string user)
         {
-            var classes = await _db.Classes.FirstOrDefaultAsync(x => x.Identification == className);
             var teacher = await _db.Teachers.FirstOrDefaultAsync(x => x.Mail == user);
-            var availableSubjects = await _db.TeacherSubjectClasses.Where(x => x.ClassID == classes.ClassID && x.TeacherID==teacher.TeacherID)
-                .Select(x=>x.Subject.Name).ToListAsync();
+            var availableSubjects = await _db.TeacherSubjectClasses.Where(x => x.ClassID == classId && x.TeacherID == teacher.TeacherID)
+                .Select(x => x.Subject).ToListAsync();
 
             return availableSubjects;
         }
