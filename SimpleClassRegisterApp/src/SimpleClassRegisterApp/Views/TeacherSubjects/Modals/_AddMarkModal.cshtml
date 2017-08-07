@@ -1,0 +1,38 @@
+﻿
+@model int
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Please choose inseration grade number:</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-vertical text-center">
+                    <div class="form-group">
+                     <div id="gr" style="display:none">
+
+                     </div>
+                        <label class="control-label col-sm-4">Grade Mark:</label>
+                        <select id="garde_list" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-defaul pull-left" data-dismiss="modal">Close</button>
+                <button id="submitMark" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>

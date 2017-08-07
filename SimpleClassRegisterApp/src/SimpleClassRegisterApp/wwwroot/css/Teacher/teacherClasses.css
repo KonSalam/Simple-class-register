@@ -2,3 +2,21 @@
 .btn-success {
     margin-left: 50px;
 }
+
+#class_list {
+    width: 120px;
+    text-align-last: center;
+}
+
+#subject_list {
+    width: 120px;
+    text-align-last: center;
+}
+
+#student_list {
+    padding-top: 40px;
+}
+
+.center_div {
+    margin: 0 auto;
+}

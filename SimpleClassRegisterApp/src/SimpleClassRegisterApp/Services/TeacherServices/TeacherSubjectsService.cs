@@ -19,7 +19,7 @@ namespace SimpleClassRegisterApp.Services.TeacherServices
         public async Task<TeacherSubjectsViewModel> GetAllSubjects(string user)
         {
             var subjects = await _db.Subjects.ToListAsync();
-            var teacher = await _db.Teachers.Include(x=>x.TeacherSubject).FirstOrDefaultAsync(x => x.Mail == user);
+            var teacher = await _db.Teachers.Include(x => x.TeacherSubject).FirstOrDefaultAsync(x => x.Mail == user);
 
             var teacherSubjectsViewModel = new TeacherSubjectsViewModel
             {
@@ -38,7 +38,7 @@ namespace SimpleClassRegisterApp.Services.TeacherServices
             await _db.TeacherSubjects.AddAsync(new TeacherSubject
             {
                 SubjectID = subject.SubjectID,
-                TeacherID = teacher.TeacherID
+                TeacherID = teacher.TeacherID,
             });
 
             await _db.SaveChangesAsync();
